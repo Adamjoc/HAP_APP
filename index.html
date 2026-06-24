@@ -323,6 +323,7 @@ main{padding:20px 16px 0}
     <button class="tab" data-v="trans"><span class="ic">↗</span>Transition <span class="badge" id="bdgTrans" style="display:none">0</span></button>
     <button class="tab" data-v="hum"><span class="ic">⌥</span>Humanities <span class="badge" id="bdgHum" style="display:none">0</span></button>
     <button class="tab" data-v="todo"><span class="ic">✓</span>To-Do <span class="badge" id="bdgTodo" style="display:none">0</span></button>
+    <button class="tab" data-v="q"><span class="ic">?</span>Questions <span class="badge" id="bdgQ" style="display:none">0</span></button>
   </nav>
 
   <main>
@@ -503,6 +504,23 @@ main{padding:20px 16px 0}
         <div class="row"><div class="body"><div class="ttl">Move unfinished tasks to today</div><div class="meta">Sweep any open tasks from earlier days onto today's list.</div></div><button class="btn ghost sm" onclick="carryOver()">Sweep</button></div>
       </div>
     </section>
+
+    <!-- ============ QUESTIONS ============ -->
+    <section class="view" id="v-q">
+      <div class="sec-h">
+        <div><div class="eyebrow">Strategic clarification</div><h2>Questions</h2><div class="lead">What to pin down with Claudette early.</div></div>
+      </div>
+      <div class="card ref">
+        <h3>From the 2025–26 AIP review</h3>
+        <p>These came out of reading the current Academy Improvement Plan against your remit. They are the tensions and gaps worth resolving before you commit to a workstream — not gotchas, just the things the plan leaves ambiguous.</p>
+        <div class="callout info" style="margin-top:13px"><span class="ic">◎</span><div>Status here reads as <b>To&nbsp;do = still to raise</b>, <b>Doing = asked / awaiting answer</b>, <b>Done = answered</b>. Tap ✎ to record the answer in the action text.</div></div>
+      </div>
+      <div class="sec-h" style="margin-top:22px">
+        <div><div class="mini-h" style="margin:0">Open questions</div></div>
+        <button class="btn red sm" onclick="openAction('q')">+ Question</button>
+      </div>
+      <div class="card" id="qList"></div>
+    </section>
   </main>
 </div>
 
@@ -638,11 +656,33 @@ const seed={
     {id:id(),name:'St Joseph\'s RC Primary',addr:'Pitman St, SE5 0TS',phone:'+442077039264',tier:'wider',note:'Camberwell',lat:51.479198,lng:-0.0985881,stat:'cold'},
     {id:id(),name:'Goose Green Primary',addr:'Tintagel Cres, SE22 8HG',phone:'+442086933568',tier:'wider',note:'East Dulwich — contested',lat:51.4615362,lng:-0.0769843,stat:'cold'}
   ],
+  q:[
+    {id:id(),txt:'T&L target conflict: QE1 sets 80% Good / 20% Outstanding, but LM1 sets 95%+ Good / 30% Outstanding. Which is this year\'s actual bar?',own:'Claudette',due:'',stat:'todo'},
+    {id:id(),txt:'What is the real Year 7 PAN, and what roll-recovery trajectory is expected this year? 560 roll / 70 in Year 7 both sit well below the implied ~833 capacity.',own:'Claudette',due:'',stat:'todo'},
+    {id:id(),txt:'Will Year 7 recruitment be elevated to a named AIP priority with me owning it — rather than one blank-review line under LM1 / CPD?',own:'Claudette',due:'',stat:'todo'},
+    {id:id(),txt:'Who owns transition/recruitment day-to-day now, and how does that sit with the pastoral remit (JOR is named on the LM1 roll action)?',own:'Claudette',due:'',stat:'todo'},
+    {id:id(),txt:'There is no AIP line for Humanities at all — how is the department\'s stabilisation being tracked at SLT level?',own:'Claudette',due:'',stat:'todo'}
+  ],
   seeded:true
 };
 let S=load();
 if(!S.feeders)S.feeders=JSON.parse(JSON.stringify(seed.feeders));
 if(S.feeders)S.feeders=S.feeders.filter(f=>!/Free School/.test(f.name||''));
+// --- one-time merge: AIP review (Jun 2026) ---
+if(!S.q)S.q=JSON.parse(JSON.stringify(seed.q));
+if(!S.aipJun26){
+  const d='2026-07-06';
+  if(!S.todos[d])S.todos[d]=[];
+  [
+    'AIP gap — Year 7 recruitment is just one blank-review line under LM1. Draft a standalone transition/recruitment priority to propose owning (use the Transition pipeline as evidence).',
+    'AIP gap — Humanities appears nowhere in the AIP. Write a named stabilisation action: ECT support + KS3 scheme-of-work coherence.',
+    'QE1 follow-up — plan next half-term Friday CPL calendar and the personalised CPL programme for Sept 2026 (started under Charlotte/RBE).',
+    'QE2 follow-up — get live marking embedded in the T&L cycle; flagged as still not consistently visible in books.',
+    'Ask Brett Johal (BJO) for current status of Project 27 RAP plan and the data-literacy work for middle leaders.'
+  ].forEach(t=>S.todos[d].push({id:Math.random().toString(36).slice(2,10),text:t,done:false,priority:true}));
+  S.aipJun26=true;
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+}
 function id(){return Math.random().toString(36).slice(2,10)}
 function load(){try{const r=localStorage.getItem(KEY);if(r)return JSON.parse(r);}catch(e){}return JSON.parse(JSON.stringify(seed));}
 function save(){localStorage.setItem(KEY,JSON.stringify(S));renderBadges();}
@@ -666,11 +706,13 @@ document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   if(t.dataset.v==='todo')renderTodoTab();
   if(t.dataset.v==='trans'){renderActions('trans');renderFeeders();}
   if(t.dataset.v==='hum')renderActions('hum');
+  if(t.dataset.v==='q')renderActions('q');
   window.scrollTo(0,0);
 });
 function goTab(v){document.querySelector('.tab[data-v="'+v+'"]').click();}
 function fabAdd(){const act=document.querySelector('.tab.active').dataset.v;
   if(act==='trans'){openAction('trans');}else if(act==='hum'){openAction('hum');}
+  else if(act==='q'){openAction('q');}
   else if(act==='todo'){document.getElementById('qTodo2').focus();}
   else{openAppt();}}
 
@@ -835,7 +877,7 @@ function carryOver(){
 
 /* ---------- Actions (transition / humanities) ---------- */
 function renderActions(area){
-  const list=S[area];const el=document.getElementById(area==='trans'?'transList':'humList');
+  const list=S[area];const el=document.getElementById(area+'List');
   const order={prog:0,todo:1,done:2};
   const sorted=[...list].sort((a,b)=>order[a.stat]-order[b.stat]);
   el.innerHTML=sorted.length?sorted.map(a=>{
@@ -849,7 +891,7 @@ function renderActions(area){
 function openAction(area,aid){
   document.getElementById('actScrim').classList.add('open');
   document.getElementById('actArea').value=area;
-  document.getElementById('actTitle').textContent=(area==='trans'?'Transition':'Humanities')+(aid?' — edit':' — new action');
+  document.getElementById('actTitle').textContent=({trans:'Transition',hum:'Humanities',q:'Question'}[area]||'Action')+(aid?' — edit':' — new');
   if(aid){const a=S[area].find(x=>x.id===aid);
     actId.value=a.id;aTxt.value=a.txt;aOwn.value=a.own||'';aDue.value=a.due||'';aStat.value=a.stat;
     document.getElementById('actDel').style.display='block';
@@ -957,6 +999,7 @@ function renderBadges(){
   badge('bdgTodo',(S.todos[t]||[]).filter(x=>!x.done).length);
   badge('bdgTrans',S.trans.filter(a=>a.stat!=='done').length);
   badge('bdgHum',S.hum.filter(a=>a.stat!=='done').length);
+  badge('bdgQ',(S.q||[]).filter(a=>a.stat!=='done').length);
 }
 function badge(id,n){const e=document.getElementById(id);if(n>0){e.style.display='inline-block';e.textContent=n;}else e.style.display='none';}
 
@@ -1024,7 +1067,7 @@ function toast(msg,type){const t=document.getElementById('toast');t.className=ty
 /* ---------- init ---------- */
 function renderAll(){renderToday();renderBadges();reflectBell();
   if(document.getElementById('v-diary').classList.contains('active'))renderDiary();
-  renderActions('trans');renderActions('hum');renderTodoTab();renderFeeders();}
+  renderActions('trans');renderActions('hum');renderActions('q');renderTodoTab();renderFeeders();}
 renderAll();
 try{document.getElementById('logoImg').src=IMG_LOGO;
   document.getElementById('avCharlotte').src=IMG_CHARLOTTE;
