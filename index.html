@@ -907,6 +907,99 @@ if(!S.rhythmJul26){
   S.rhythmJul26=true;
   try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
 }
+// --- one-time merge: toolkits, OCR B KS4 confirmed + induction build (7 Jul 2026 eve) ---
+if(!S.toolkitJul26){
+  [
+    ['Y11 OCR B AUDIT (w/c 7 Sept, with Salwa) — per the Fed delivery schedule the incoming Y11 should have completed Urban Futures, Global Hazards, Sustaining Ecosystems, Distinctive Landscapes + physical fieldwork. Audit each against book/assessment evidence; recovery sequence agreed by 18 Sept (re-teach vs compress vs fold into Do Nows / Unit 3 prep).','Me'],
+    ['FIELDWORK COMPLIANCE — OCR B Paper 3 requires physical AND human fieldwork. If Y10 missed physical fieldwork this summer, BOTH must run autumn 2026: EVC sign-off (JOR), budget, venue booked early. Raise with CB before 17 July — cost + calendar implications.','Me'],
+    ['KS3 toolkit localisation with Salwa (autumn 1): Angry Earth tectonic case-study choice, Middle East locational knowledge selections, Topic 11 Y8 fieldwork enquiry title + location. The "such as" gaps are deliberately ours to fill — align KS3 choices to pre-load KS4 case studies.','Me'],
+    ['Check shared drive: did Latifah\'s team ever localise the KS3 geography toolkit (completed schemes, chosen case studies, fieldwork enquiry) or is Salwa inheriting the raw framework? Ask CNU / anyone who covered geography.','Me'],
+    ['Chase Fed central teams: History KS3 toolkit + KS4 LTP (second upload was a duplicate of geography — history still missing) and the full KS4 Geography toolkit beyond the delivery schedule.','Me'],
+    ['Thursday convo — Salwa: OCR B or AQA/Edexcel background? (If new to OCR B, plan Paper 3 decision-making familiarisation.) Fieldwork + risk-assessment experience? GIS confidence? What did Loxford structure well that we should steal?','Me'],
+    ['Thursday convo — Molly: ECF position + stated priorities, any science (second subject) on her timetable, deep vs thin history periods mapped to our units, mentor + induction tutor confirmed before she leaves Thursday.','Me']
+  ].forEach(([t,o])=>S.hum.push({id:Math.random().toString(36).slice(2,10),txt:t,own:o,due:'',stat:'todo'}));
+  S.q.push(
+    {id:Math.random().toString(36).slice(2,10),txt:'Wed 2 Sept is unaccounted for: ALG planning day Tue 1st, INSET Thu 3rd. Is the 2nd a second staff/prep day or empty? Confirm with Honie.',own:'Either',due:'',stat:'todo'},
+    {id:Math.random().toString(36).slice(2,10),txt:'Exams check (ASL): confirm the current Y10 geography cohort is entered/prepared for OCR B and which units were actually taught this year — feeds the September audit.',own:'Either',due:'',stat:'todo'}
+  );
+  const dtk='2026-07-08';
+  if(!S.todos[dtk])S.todos[dtk]=[];
+  [
+    'Confirm Asia\'s (ASL) Thursday induction schedule (she runs ECT/new-staff centrally); slot the Humanities dept session around it and strike anything she already covers. Sequence built: framing → Curriculum Power deck → guided toolkit reading → Q&A → individual convos → co-set Sept agenda → summer comms.',
+    'Print/share for Thursday: KS3 Geography Toolkit, KS4 OCR B delivery schedule, induction checklist doc; load the Curriculum Power deck.',
+    'Request IT/Bromcom accounts for Salwa + Molly NOW — do not let their provisioning repeat my CPOMS saga.'
+  ].forEach(t=>S.todos[dtk].push({id:Math.random().toString(36).slice(2,10),text:t,done:false,priority:true}));
+  S.appointments.push({id:Math.random().toString(36).slice(2,10),date:'2026-09-01',time:'',title:'ALG PLANNING DAY',category:'ALG',location:'HAP',notes:'Confirmed Tue 1 Sept. Wed 2 Sept unaccounted for — ask Honie. Then INSET Thu 3, Y7-only Fri 4, all students Mon 7. Salwa + Molly first-days plan maps onto this runway.'});
+  const ind2=S.appointments.find(a=>a.date==='2026-07-09'&&/^Induction day/.test(a.title||''));
+  if(ind2){ind2.notes='Asia (ASL) runs the central new-staff schedule — slot the dept session around it, no duplication. Dept sequence: framing (founding members) → Curriculum Power deck → guided toolkit reading w/ 3 prompts (Salwa: KS3 Geog toolkit + KS4 OCR B schedule; Molly: history toolkit if it lands) → Q&A → individual conversations (question lists in checklist doc) → co-set Sept agenda (INSET 3rd, Y7-only 4th, all in 7th) → summer comms. KS4 spec = OCR B Harris-wide, dictated by HQ geog team. NB: AOC wrote the KS3 toolkit as Lead Consultant — 2026 edition is a light update; speak to design decisions from the inside.';}
+  S.toolkitJul26=true;
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+}
+// --- one-time merge: close out answered questions + stale todos (7 Jul 2026 eve) ---
+if(!S.answersJul26){
+  const closeQ=(re,ans)=>{(S.q||[]).forEach(q=>{if(q.stat!=='done'&&re.test(q.txt||'')){q.stat='done';q.txt+=' — ✓ ANSWERED: '+ans;}});};
+  closeQ(/Names and start details of the incoming ECT/,'Salwa Zaveri (Geography, ex-Loxford School Trust) + Molly Bryant-Jones (History ECT, science second subject). Induction Thu 9 July.');
+  closeQ(/Who is the visiting VP from Harris Clapham/,'Rachel, Harris Clapham (surname via Honie). Learning-walk handover still to arrange — tracked separately.');
+  closeQ(/Is Bethany Aldridge/,'Left — no geography bridge. Y10 risk stands as stated.');
+  closeQ(/Latifah Rennie leaving = Head of Year 10 gap/,'PPA (Penny Paraskeva-Alimiaga) takes HoY10 + Y10 careers, per 2026-27 ALG structure.');
+  closeQ(/Who exactly is in .my team./,'2026-27 ALG doc: title SVP; remit from Sept = Humanities & MFL, SEF, ECF, Transition, Raising Standards. Lanes structurally separate from Charlotte\'s.');
+  closeQ(/Is Lanando Vanhorne staying/,'Not on the 2026-27 ALG doc; Transition + Developing OTTs remit transfers to me. One knowledge-capture conversation before 17 July.');
+  closeQ(/How does my OTT\/transition work interface with Lanando/,'Superseded — the remit transfers to me from September.');
+  closeQ(/Do I chair EML/,'No — I ATTEND Thu 15:40 EML; EML Development stays CB/Charlotte per ALG doc. English & Maths stay with Charlotte.');
+  closeQ(/When exactly is Charlotte.s phased return/,'Phased return started Tue 7 July. 2026-27 ALG defines the split: Charlotte keeps QoE, Curriculum/Timetable, English & Maths, LPs, Professional Learning (Fri CPD), EML, EAL, Calendar. CB handled the R&R framing at ALG.');
+  const closeT=re=>{Object.keys(S.todos||{}).forEach(d=>(S.todos[d]||[]).forEach(t=>{if(!t.done&&re.test(t.text||''))t.done=true;}));};
+  closeT(/names\/contacts of incoming ECT \+ OTT/);
+  closeT(/Identify the Harris Clapham visiting VP/);
+  closeT(/Confirm with CB who is in .my team./);
+  S.answersJul26=true;
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+}
+// --- one-time merge: CB meeting Thu 9 Jul 12:30 (added 7 Jul eve) ---
+if(!S.cbMeetJul26){
+  S.appointments.push({id:Math.random().toString(36).slice(2,10),date:'2026-07-09',time:'12:30',title:'CB + AOC + Charlotte + Rachel — 12:30-13:20',category:'T&L',location:'TBC',notes:'Called by CB. Likely: R&R/lanes framing (custodian till Sept, colleague after — let CB do the framing, do not negotiate remit), Rachel\'s weekly T&L arrangement + learning-walk handover, autumn T&L priorities. Sits inside induction day — plan Salwa/Molly on guided reading or lunch 12:30-13:20. ASK: Rachel\'s learning-walk records before term ends.'});
+  S.cbMeetJul26=true;
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+}
+// --- one-time merge: full ECT responsibility transfers from ASL (7 Jul eve) ---
+if(!S.ectJul26){
+  S.hum.push({id:Math.random().toString(36).slice(2,10),txt:'ECT FULL HANDOVER from Asia (not a split — whole remit transfers). Before 17 July get: complete list of current ECTs incl. anyone mid-induction (+ any flagged concerns/support in flight — these inherit LIVE with assessment deadlines), mentor map + who is trained, Appropriate Body contact + submission calendar, provider relationship + enrolment process. Provider likely Harris\'s own institute (on site at HAP — confirm); AB is a SEPARATE statutory role (teaching school hub) — confirm which hub and who submits.',own:'Me',due:'2026-07-17',stat:'todo'});
+  S.ectJul26=true;
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+}
+// --- one-time merge: Salwa abroad until 3 Sept INSET (8 Jul am) ---
+if(!S.salwaJul26){
+  const indApp=S.appointments.find(a=>a.date==='2026-07-09'&&/^Induction day/.test(a.title||''));
+  if(indApp){indApp.title='Induction day — Molly ONLY (Salwa abroad until 3 Sept)';indApp.notes='Salwa not in until 3 Sept INSET — Thursday is Molly-only. HOLD the Curriculum Power deck for 3 Sept (deliver once, to both). Molly session: welcome/framing, history toolkit reading (or geog KS3 as framework example), individual convo (ECF position, science second subject, deep/thin periods, mentor confirmed), ECT statutory setup, co-set HER Sept plan, summer comms. Salwa = remote track: welcome email w/ toolkit + OCR B schedule this week, ASK SPEC QUESTION BY EMAIL NOW (OCR B or AQA/Edexcel — determines August support), optional late-Aug video call. Fieldwork venue decisions needing summer booking are now MINE provisionally — flag at CB meeting 12:30.';}
+  S.hum.push({id:Math.random().toString(36).slice(2,10),txt:'SALWA REMOTE TRACK: email this week = her whole July induction. Include KS3 toolkit + OCR B delivery schedule + spec question (which board has she taught?) + timetable when it lands. Offer optional late-Aug video call. Her toolkit-reading prompts + individual convo move to 3 Sept / summer call.',own:'Me',due:'2026-07-10',stat:'todo'});
+  S.salwaJul26=true;
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+}
+// --- one-time merge: Asia ECT handover intel (8 Jul) ---
+if(!S.asiaEctJul26){
+  S.hum.push(
+    {id:Math.random().toString(36).slice(2,10),txt:'ECT/TRAINEE ROSTER 2026-27 (from ASL, 8 Jul): Maths + English = School Direct · History (Molly) + PE = ECTs. CLARIFY with ASL: are Maths/English trainees in their ITT year (→ NOT ECTs: ITT framework, provider assesses, they convert to ECTs Sept 2027) or School-Direct-route first-year ECTs (→ statutory induction now)? If trainees, my statutory caseload = 2 ECTs + oversight of 2 trainees. I am Managing Mentor (= induction tutor). AB + provider BOTH = NIoT, via the Harris institute on site.',own:'Me',due:'',stat:'todo'},
+    {id:Math.random().toString(36).slice(2,10),txt:'MENTOR MAP: Maths = Chamala · English = Rehab · PE = Chris · History (Molly) = Fed consultant, name/contact needed from ASL. ACTIONS: get consultant contact + first contact before 17 July + email intro to Molly; check Chris\'s capacity if 0.4; confirm all four mentors NIoT-trained.',own:'Me',due:'2026-07-17',stat:'todo'}
+  );
+  S.asiaEctJul26=true;
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+}
+// --- one-time merge: real induction day schedule received (8 Jul) ---
+if(!S.schedJul26){
+  const indA=S.appointments.find(a=>a.date==='2026-07-09'&&/^Induction day/.test(a.title||''));
+  if(indA){indA.time='08:00';indA.title='Induction day (Molly; Salwa abroad) — I deliver 8:20 + 14:00';indA.notes='ASL schedule: 8:00 arrival · 8:20-8:40 LINE-UP DEMO Lyndhurst Playground (ME + ASL — speak to threshold greeting/silent entry as lived architecture) · 8:40 systems/photos AG01 (Kieran Janali ICT tech — grab him re my Outlook access) · 9:00 CB vision · 9:30 safeguarding JOR · 10:45 behaviour JOR · 11:15-12:15 T&L inc Curriculum & Assessment — CHARLOTTE (listen in if free; my 3 Sept session = subject-depth complement, not rival) · 12:15 tour + 13:00 student panel (Morni-Shae Kelly-Minto) cover my CB meeting 12:30-13:20 cleanly · 13:20 lunch · 14:00-15:30 DEPT TIME W/ MOLLY: framing 10min → toolkit orientation as SoW intro → individual convo (ECF position, science 2nd subject, deep/thin periods) → Bromcom → co-set her Sept plan. Choose her drop-in lesson DELIBERATELY (avoid weak cover as first taste). 15:30 reflection (ASL). Mentor codes: Maths SSE · English REM (Rehab) · Humanities AOC (= me tomorrow; Fed consultant later) · PE CMA.';}
+  Object.keys(S.todos||{}).forEach(d=>(S.todos[d]||[]).forEach(t=>{if(!t.done&&/Confirm Asia's \(ASL\) Thursday induction schedule/.test(t.text||''))t.done=true;}));
+  S.schedJul26=true;
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+}
+// --- one-time merge: EEF Guide to Inclusive Teaching + statutory inclusion strategy (9 Jul) ---
+if(!S.eefJul26){
+  S.q.push({id:Math.random().toString(36).slice(2,10),txt:'STATUTORY: every school must publish an INCLUSION STRATEGY by end of Dec 2026 (Inclusive Mainstream Fund condition; DfE expects every secondary to run an inclusion base). Who owns it at HAP — JOR or CB (SEND/EAL vision)? Should be written as one exercise with the SEF (Inclusion = evaluation area 1). RAISE AT ALG TUE 14 JULY.',own:'Either',due:'',stat:'todo'});
+  const de='2026-07-14';
+  if(!S.todos[de])S.todos[de]=[];
+  S.todos[de].push({id:Math.random().toString(36).slice(2,10),text:'ALG: flag statutory inclusion strategy (due end Dec, IMF condition) + ownership question. Note EEF Guide to Inclusive Teaching (pub 6 Jul 26): universal-first two-part model, myth-busting on adaptations ("increase intensity of high-quality teaching, not change its nature") — cite in SEF Inclusion section; free scenario-based CPD resources → OTT/ECT adaptive-teaching strand.',done:false,priority:true});
+  S.eefJul26=true;
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+}
 if(!S.aipJun26){
   const d='2026-07-06';
   if(!S.todos[d])S.todos[d]=[];
