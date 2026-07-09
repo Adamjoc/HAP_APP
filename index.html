@@ -1000,6 +1000,18 @@ if(!S.eefJul26){
   S.eefJul26=true;
   try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
 }
+// --- one-time merge: Fri 10 Jul todos (added 9 Jul pm) ---
+if(!S.fri10Jul26){
+  const df='2026-07-10';
+  if(!S.todos[df])S.todos[df]=[];
+  [
+    'Email Molly with curriculum and lesson materials (follow-up from induction day)',
+    'Meet with Radhika — AM',
+    'Meet with Daniel'
+  ].forEach(t=>S.todos[df].push({id:Math.random().toString(36).slice(2,10),text:t,done:false,priority:true}));
+  S.fri10Jul26=true;
+  try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+}
 if(!S.aipJun26){
   const d='2026-07-06';
   if(!S.todos[d])S.todos[d]=[];
